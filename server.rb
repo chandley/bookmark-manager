@@ -10,7 +10,8 @@ DataMapper.auto_upgrade!
 
 class Server < Sinatra::Base
   get '/' do
-    'Hello Server!'
+    @links = Link.all
+    erb :index
   end
 
   
