@@ -1,5 +1,6 @@
 ENV["RACK_ENV"] = '_test'
 require_relative '../server.rb'
+require 'database_cleaner'
 # specs live under a `spec` directory, which RSpec adds to the `$LOAD_PATH`.
 # The generated `.rspec` file contains `--require spec_helper` which will cause this
 # file to always be loaded, without a need to explicitly require it in any files.
@@ -28,6 +29,20 @@ RSpec.configure do |config|
     # ...rather than:
     #   # => "be bigger than 2"
     expectations.include_chain_clauses_in_custom_matcher_descriptions = true
+
+    config.before(:suite) do
+      DatabaseCleaner.strategy = :transaction
+      DatabaseCleaner.clean_with(:truncation)
+    end
+
+    config.before(:each) do
+      DatabaseCleaner.start
+    end
+
+    config.after(:each) do
+      DatabaseCleaner.clean
+    end
+    
   end
 
   # rspec-mocks config goes here. You can use an alternate test double
