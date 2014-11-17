@@ -1,4 +1,4 @@
-ENV["RACK_ENV"] = '_test'
+ENV["RACK_ENV"] = 'test'
 require_relative '../server.rb'
 require 'database_cleaner'
 require 'capybara/rspec'
