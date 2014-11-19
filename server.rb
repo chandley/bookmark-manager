@@ -2,10 +2,12 @@ require 'sinatra/base'
 
 require './lib/database.rb'
 require './app/helpers/helpers'
+require 'rack-flash'
 
 class Server < Sinatra::Base
 
   include Helpers 
+  use Rack::Flash
   
   enable :sessions
   set :session_secret, 'super secret'
@@ -37,11 +39,16 @@ class Server < Sinatra::Base
   end
 
   post '/users' do
-    user = User.create(:email => params[:email],
+    @user = User.create(:email => params[:email],
                 :password => params[:password],
                 :password_confirmation => params[:password_confirmation])
-    session[:user_id] = user.id
-    redirect to('/')
+    if @user.save
+      session[:user_id] = @user.id
+      redirect to('/')
+    else
+      flash[:notice] = "Sorry, your passwords don't match"
+      erb :"users/new"
+    end
   end
 
   run! if app_file == $0
