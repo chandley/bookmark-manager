@@ -82,4 +82,26 @@ feature 'User signs out' do
 
 end
 
+feature 'User forgets password' do
+
+  include SessionHelpers
+
+  before(:each) do
+    User.create(:email => 'test@test.com',
+                :password => 'test',
+                :password_confirmation => 'test')
+  end
+
+  scenario 'when clicks I forgot my password' do
+    visit('/sessions/new')
+    click_link('I forgot my password')
+    expect(page).to have_content("Please enter email")
+  end
+
+end
+
+
+
+
+
 

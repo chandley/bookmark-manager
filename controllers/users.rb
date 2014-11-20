@@ -17,4 +17,8 @@ class Server
     end
   end
 
+  get '/users/forgot_password' do
+    'Please enter email'
+  end
+
 end
