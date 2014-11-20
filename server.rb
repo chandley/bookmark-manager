@@ -8,6 +8,7 @@ class Server < Sinatra::Base
 
   include Helpers 
   use Rack::Flash
+  use Rack::MethodOverride
 
   configure do
     register Sinatra::Partial
