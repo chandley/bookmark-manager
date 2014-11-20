@@ -1,0 +1,8 @@
+  <% if flash.now[:errors] && !flash.now[:errors].empty? %>
+   Sorry, there were the following errors with your form
+     <ul id="errors">
+        <% flash.now[:errors].each do |error| %>
+          <li><%= error %></li>
+      <% end %>
+  </ul>
+  <% end %>
