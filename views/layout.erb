@@ -1,8 +1,23 @@
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" type="text/css" href="/css/normalize.css">
+<link rel="stylesheet" type="text/css" href="/css/application.css">
+
 <body>
+  <% if flash[:notice] %>
+    <div id='notice'>
+      <%= flash[:notice] %>
+    </div>
+  <% end %>
   <% if current_user %>
-   Welcome, <%= current_user.email %>
-   <% end %>
-   <% if flash.now[:errors] && !flash.now[:errors].empty? %>
+    Welcome, <%= current_user.email %>
+   
+    <form method='post' action='/sessions'>
+      <input type='hidden' name='_method' value='delete'>
+      <input type='submit' value='Sign out'>
+    </form>
+  <% end %>
+  <% if flash.now[:errors] && !flash.now[:errors].empty? %>
    Sorry, there were the following errors with your form
      <ul id="errors">
         <% flash.now[:errors].each do |error| %>
@@ -10,5 +25,8 @@
       <% end %>
   </ul>
   <% end %>
+ 
+
   <%= yield %>
 </body>
+</html>
