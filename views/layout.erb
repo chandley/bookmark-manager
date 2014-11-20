@@ -2,8 +2,25 @@
 <html>
 <link rel="stylesheet" type="text/css" href="/css/normalize.css">
 <link rel="stylesheet" type="text/css" href="/css/application.css">
+<header>
+   <div id="logo">Bookmark Manager</div>
+  <div id='user-links'>
+    <% if current_user %>
+      <span id="welcome-message">
+        Welcome, <%= current_user.email %>
+      </span>
 
+      <form id="sign-up" method="post" action="/sessions">
+        <input type="hidden" name="_method" value="delete">
+        <input type="submit" value="Sign out">
+      </form>
+
+      <% end %>
+
+    </div>
+  </header>
 <body>
+
   <% if flash[:notice] %>
     <div id='notice'>
       <%= flash[:notice] %>
