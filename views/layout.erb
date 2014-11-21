@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html>
-<link rel="stylesheet" type="text/css" href="/css/normalize.css">
-<link rel="stylesheet" type="text/css" href="/css/application.css">
+<head>
+  <link rel="stylesheet" type="text/css" href="/css/normalize.css">
+  <link rel="stylesheet" type="text/css" href="/css/application.css">
+</head>
 
- <%= partial :header %>
+ 
 <body>
-
+  <%= partial :header %>
   <% if flash[:notice] %>
     <div id='notice'>
       <%= flash[:notice] %>
